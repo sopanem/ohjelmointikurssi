@@ -22,7 +22,7 @@ def read_file(filename):
                 series.setdefault(genre, []).append(name)
 
         file.close()
-        return sorted(series)
+        return sorted(series.items())
 
     except ValueError:
         print("Error: rows were not in the format name;genres.")
@@ -47,8 +47,8 @@ def main():
         if genre == "exit":
             return
 
-        for name in genre_data(genre, []):
-            print(name)
+        for name, key in genre_data(genre):
+            print(name[key])
 
 
 if __name__ == "__main__":

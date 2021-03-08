@@ -1,19 +1,24 @@
-import csv
-
-
 def read_file(fileName):
-    contacts = {}
-    with open(fileName) as f:
-        csvFile = csv.reader(f, delimiter=';')
+    with open(fileName, "r") as f:
+        file = f.readlines()
 
-        for row in csvFile:
-            for col in row:
-                print(col)
+        contacts = {}
 
+        first_line = True
+        tmp = []
+        for row in file:
+            rows = row.split(";")
 
-def main():
-    info = read_file("contacts.csv")
+            if first_line:
+                tmp = rows
 
+                first_line = False
+                continue
 
-if __name__ == "__main__":
-    main()
+            temp = {}
+            for ihansama in range(1, len(rows)):
+                temp[tmp[ihansama].strip()] = rows[ihansama].strip()
+
+            contacts[rows[0]] = temp
+
+        return contacts
